@@ -9,4 +9,12 @@ public class CalculatorTests
 
         Assert.Equal(2, calc.Add(1, 1));
     }
+
+    [Fact]
+    public void Divids()
+    {
+        var calc = new Calculator();
+
+        Assert.Equal(2, calc.Divide(4, 2));
+    }
 }
