@@ -1,35 +1,11 @@
-coverage:
-  status:
-    project: false
-    patch:
-      # frontend:
-      #   # codecov will not fail status checks for master
-      #   only_pulls: true
-      #   informational: false # Fail the check
-      #   target: 60%
-      #   flags:
-      #     - frontend
-      dotnet:
-        # codecov will not fail status checks for master
-        only_pulls: true
-        informational: false # Fail the check
-        target: 90%
-        flags:
-          - dotnet
-
-flags:
-  frontend:
-    paths:
-      - 'static/app/'
-    carryforward: true
-    # FE uploads 4 coverage reports. This property ensures codecov waits
-    # for all reports to be uploaded before creating a GitHub status check.
-    # NOTE: If you change this, make sure to change `comment.after_n_builds` below as well.
-    after_n_builds: 4
-  dotnet:
-    paths:
-      - 'dotnet/'
-    carryforward: true
-    # Do not send any status checks until n coverage reports are uploaded.
-    # NOTE: If you change this, make sure to change `comment.after_n_builds` below as well.
-    # after_n_builds: 18
+# Read more here: https://docs.codecov.com/docs/pull-request-comments
+comment:
+  layout: 'diff, files'
+  # Update, if comment exists. Otherwise post new.
+  behavior: default
+  # Comments will only post when coverage changes. Furthermore, if a comment
+  # already exists, and a newer commit results in no coverage change for the
+  # entire pull, the comment will be deleted.
+  require_changes: true
+  require_base: true # must have a base report to post
+  require_head: true # must have a head report to post
