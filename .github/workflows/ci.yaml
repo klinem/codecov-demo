@@ -1,0 +1,19 @@
+name: CI
+
+on: [push, pull_request]
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test python API
+    steps:
+    - uses: actions/checkout@v4
+    - run: dotnet restore
+      working-directory: dotnet
+      
+    - run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      working-directory: dotnet
